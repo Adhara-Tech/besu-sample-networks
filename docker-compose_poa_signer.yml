@@ -78,9 +78,9 @@ services:
       - 8545:8545/tcp
 
   ethsignerRpcNode:
-    image: pegasyseng/ethsigner:latest
+    image: pegasyseng/ethsigner:0.6.1-SNAPSHOT
     command: [
-      "--chain-id=2018",
+      "--chain-id=44844",
       "--http-listen-host=0.0.0.0",
       "--downstream-http-port=8545",
       "--downstream-http-host=rpcnode",

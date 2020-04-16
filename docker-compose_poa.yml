@@ -22,6 +22,8 @@ services:
       - ./config/besu/config.toml:/config/config.toml
       - ./config/besu/${SAMPLE_POA_NAME-ibft2}Genesis.json:/config/genesis.json
       - ./config/besu/networkFiles/bootnode/keys:/opt/besu/keys
+    ports:
+      - 22000:8545/tcp
 
   validator2:
     image: sample-network/besu:${BESU_VERSION}
@@ -35,6 +37,8 @@ services:
       - ./config/besu/networkFiles/validator2/keys:/opt/besu/keys
     depends_on:
       - bootnode
+    ports:
+      - 22001:8545/tcp
 
   validator3:
     image: sample-network/besu:${BESU_VERSION}
@@ -48,6 +52,8 @@ services:
       - ./config/besu/networkFiles/validator3/keys:/opt/besu/keys
     depends_on:
       - bootnode
+    ports:
+      - 22002:8545/tcp
 
   validator4:
     image: sample-network/besu:${BESU_VERSION}
@@ -61,6 +67,8 @@ services:
       - ./config/besu/networkFiles/validator4/keys:/opt/besu/keys
     depends_on:
       - bootnode
+    ports:
+      - 22003:8545/tcp
 
   rpcnode: #  We keep one node named rpcnode to have a specific node to connect the explorer
     image: sample-network/besu:${BESU_VERSION}
@@ -77,33 +85,33 @@ services:
     ports:
       - 8545:8545/tcp
 
-  explorer:
-    build: block-explorer-light/.
-    image: sample-network/block-explorer-light:${BESU_VERSION}
-    depends_on:
-      - rpcnode
-    ports:
-      - 25000:80/tcp
-
-  prometheus:
-    image: "prom/prometheus"
-    volumes:
-      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus:/prometheus
-    command:
-      - --config.file=/etc/prometheus/prometheus.yml
-    ports:
-      - 9090:9090/tcp
-
-  grafana:
-    image: "grafana/grafana"
-    environment:
-      - GF_AUTH_ANONYMOUS_ENABLED=true
-    volumes:
-      - ./monitoring/grafana/provisioning/:/etc/grafana/provisioning/
-      - grafana:/var/lib/grafana
-    ports:
-      - 3000:3000/tcp
+ # explorer:
+ #   build: block-explorer-light/.
+ #   image: sample-network/block-explorer-light:${BESU_VERSION}
+ #   depends_on:
+ #     - rpcnode
+ #   ports:
+ #     - 25000:80/tcp
+ #
+ # prometheus:
+ #   image: "prom/prometheus"
+ #   volumes:
+ #     - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+ #     - prometheus:/prometheus
+ #   command:
+ #     - --config.file=/etc/prometheus/prometheus.yml
+ #   ports:
+ #     - 9090:9090/tcp
+ #
+ # grafana:
+ #   image: "grafana/grafana"
+ #   environment:
+ #     - GF_AUTH_ANONYMOUS_ENABLED=true
+ #   volumes:
+ #     - ./monitoring/grafana/provisioning/:/etc/grafana/provisioning/
+ #     - grafana:/var/lib/grafana
+ #   ports:
+ #     - 3000:3000/tcp
 
 volumes:
   public-keys:

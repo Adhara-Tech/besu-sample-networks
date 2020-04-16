@@ -8,6 +8,7 @@ rpc-http-enabled=true
 rpc-http-host="0.0.0.0"
 rpc-http-port=8545
 rpc-http-cors-origins=["*"]
+rpc-http-api=["ETH","NET","IBFT","DEBUG","WEB3", "TXPOOL"]
 
 # ws
 rpc-ws-enabled=true
@@ -25,4 +26,4 @@ metrics-enabled=true
 metrics-host="0.0.0.0"
 metrics-port=9545
 
-
+min-gas-price="0"
