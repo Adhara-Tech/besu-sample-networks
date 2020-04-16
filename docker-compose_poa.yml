@@ -83,7 +83,7 @@ services:
     depends_on:
       - bootnode
     ports:
-      - 22004:8545/tcp
+      - 8545:8545/tcp
 
  # explorer:
  #   build: block-explorer-light/.
