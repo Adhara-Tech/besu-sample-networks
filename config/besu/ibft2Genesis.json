@@ -6,7 +6,9 @@
     "ibft2" : {
       "blockperiodseconds" : 1,
       "epochlength" : 30000,
-      "requesttimeoutseconds" : 10
+      "requesttimeoutseconds" : 10,
+      "blockreward": "0",
+      "miningbeneficiary": "fe3b557e8fb62b89f4916b721be55ceb828dbd73"
     }
   },
   "nonce" : "0x0",
